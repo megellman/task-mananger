@@ -16,6 +16,9 @@ $(function () {
 // create task table row on task form submission
 taskForm.on("submit", function (e) {
     e.preventDefault();
+    
+    // remove all table rows before adding new ones 
+    $(tableBody > 'tr').remove();
     console.log("Form submitted!");
 
     // creates a new object with form data 
@@ -69,6 +72,8 @@ taskForm.on("submit", function (e) {
 
 // on page load, get storageData from local storage and create tasks
 $(document).ready(function () {
+    // remove all table rows before adding new ones 
+    $(tableBody > 'tr').remove();
     if (!(localStorage.storageData)) {
         console.log('storage empty, no tasks to load');
     } else {
