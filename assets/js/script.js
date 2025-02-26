@@ -34,11 +34,15 @@ taskForm.on("submit", function (e) {
     // if no storage data yet, then save form data as storage data
     if (!(localStorage.storageData)) {
         console.log('storage empty');
+        // initializing an empty array
         storageData = [];
+        // pushing formData obj into empty array
         storageData.push(formData);
         localStorage.setItem('storageData', JSON.stringify(storageData));
     } else {
+        // pulling storageData from local storage and putting its value into variable storageData
         storageData = JSON.parse(localStorage.getItem('storageData'));
+        // add new form data to storage data
         storageData.push(formData);
         console.log('storageData', storageData)
 
