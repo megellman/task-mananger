@@ -57,26 +57,30 @@
         </div>
         </div>
         <!-- Task Info Form -->
-        <form id="task-form" class="form card-body bg-light rounded mx-3">
+        <form id="task-form" class="needs-validation form card-body bg-light rounded mx-3">
             <div class="mb-3">
                 <label for="task-name" class="form-label">Task name</label>
-                <input name="taskName" class="form-control" id="task-name" rows="3"></input>
+                <input name="taskName" class="form-control" id="task-name" rows="3" required></input>
+                <div class="invalid-feedback">Please fill out this field.</div>
             </div>
             <div class="mb-3">
-                <select name="priority" class="form-select" aria-label="Default select example">
-                    <option selected>Priority level</option>
+                <select name="priority" class="form-select" aria-label="Default select example" required>
+                    <option selected disabled value>Priority level</option>
                     <option value="1">High</option>
                     <option value="2">Medium</option>
                     <option value="3">Low</option>
                 </select>
+                <div class="invalid-feedback">Please fill out this field.</div>
             </div>
             <div class="mb-3">
                 <label for="date-picker" class="form-label">Due date</label>
-                <input name="dueDate" type="date" class="form-control" id="date-picker">
+                <input name="dueDate" type="date" class="form-control" id="date-picker" required>
+                <div class="invalid-feedback">Please fill out this field.</div>
             </div>
             <div class="mb-3">
                 <label for="task-description" class="form-label">Task description</label>
-                <textarea name="description" class="form-control" id="task-description" rows="3"></textarea>
+                <textarea name="description" class="form-control" id="task-description" rows="3" required></textarea>
+                <div class="invalid-feedback">Please fill out this field.</div>
             </div>
             <div class="col-auto">
                 <button type="submit" class="btn btn-primary">Submit</button>
