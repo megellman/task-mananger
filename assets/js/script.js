@@ -40,7 +40,7 @@ taskForm.on("submit", function (e) {
             newRow.addClass('bg-warning');
         } else if(formData[x] === '3'){
             $('<td>').text('Low').appendTo(newRow);
-            newRow.addClass('bg-primary');
+            newRow.addClass('bg-success');
         } else {
             $('<td>').text(formData[x]).appendTo(newRow);
         }
@@ -95,7 +95,7 @@ $(document).ready(function () {
                     newRow.addClass('bg-warning');
                 } else if(storageData[i][x] === '3'){
                     $('<td>').text('Low').appendTo(newRow);
-                    newRow.addClass('bg-primary');
+                    newRow.addClass('bg-success');
                 } else {
                     $('<td>').text(storageData[i][x]).appendTo(newRow);
                 }
