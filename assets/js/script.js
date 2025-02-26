@@ -25,8 +25,22 @@ taskForm.on("submit", function (e) {
 
     // create new row
     let newRow = $('<tr>');
+
+    // change color of task based on priority
+    // chagned task priority to a word, not a number
     for (let x in formData) {
-        $('<td>').text(formData[x]).appendTo(newRow);
+        if(formData[x] === '1'){
+            $('<td>').text('High').appendTo(newRow);
+            newRow.addClass('bg-danger');
+        } else if(formData[x] === '2'){
+            $('<td>').text('Medium').appendTo(newRow);
+            newRow.addClass('bg-warning');
+        } else if(formData[x] === '3'){
+            $('<td>').text('Low').appendTo(newRow);
+            newRow.addClass('bg-primary');
+        } else {
+            $('<td>').text(formData[x]).appendTo(newRow);
+        }
     }
     newRow.append($('<button type="button" class="row-btn-close" aria-label="Close">Delete</button>'));
     newRow.appendTo(tableBody);
