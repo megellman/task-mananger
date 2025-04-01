@@ -82,7 +82,6 @@ $(document).ready(function () {
 
         // get storageData and save as an array
         storageData = JSON.parse(localStorage.getItem('storageData'));
-        console.log(storageData)
 
         // create table rows
         for (let i = 0; i < storageData.length; i++) {
