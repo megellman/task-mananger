@@ -18,12 +18,14 @@ taskForm.on("submit", function (e) {
     e.preventDefault();
     
     // remove all table rows before adding new ones 
-    $(tableBody > 'tr').remove();
+    resetTable();
+
     console.log("Form submitted!");
 
     // creates a new object with form data 
     // mapping key value pairs from form data to new obj
     const formData = Object.fromEntries((taskForm).serializeArray().map(pair => [pair.name, pair.value]))
+    // formData.id = uuid.v4();
     console.log('formData: ', formData);
 
     // create new row
@@ -45,7 +47,7 @@ taskForm.on("submit", function (e) {
             $('<td>').text(formData[x]).appendTo(newRow);
         }
     }
-    newRow.append($('<button type="button" class="row-btn-close btn-sm bg-secondary rounded" data-toggle="button" aria-label="Close">Delete</button>'));
+    newRow.append($('<button type="button" class="btn-delete row-btn-close btn-sm bg-secondary rounded" data-toggle="button" aria-label="Close">Delete</button>'));
     newRow.appendTo(tableBody);
 
     // if no storage data yet, then save form data as storage data
@@ -72,8 +74,7 @@ taskForm.on("submit", function (e) {
 
 // on page load, get storageData from local storage and create tasks
 $(document).ready(function () {
-    // remove all table rows before adding new ones 
-    $(tableBody > 'tr').remove();
+    resetTable();
     if (!(localStorage.storageData)) {
         console.log('storage empty, no tasks to load');
     } else {
@@ -101,8 +102,39 @@ $(document).ready(function () {
                 }
             }
             
-            newRow.append($('<button type="button" class="row-btn-close btn-sm bg-secondary rounded" data-toggle="button" aria-label="Close">Delete</button>'));
+            newRow.append($('<button type="button" class="btn-delete row-btn-close btn-sm bg-secondary rounded" data-toggle="button" aria-label="Close">Delete</button>'));
             newRow.appendTo(tableBody);
         }
     }
 })
+
+ // remove all table rows before adding new ones 
+function resetTable(){
+    $(tableBody > 'tr').remove();
+}
+
+// if element with btn-delete class is clicked, call delete task function
+$(document).on('click', function(e){
+    if($(e.target).hasClass('btn-delete'))deleteTask(e)
+})
+
+// delete task from table
+function deleteTask(e){
+    // pulling storageData from local storage and putting its value into variable storageData
+    let storageData = JSON.parse(localStorage.getItem('storageData'));
+
+    let target = $(e.target).parent().children().eq(0).text();
+
+    // deletes element from html
+    $(e.target).parent().remove()
+
+    console.log(Object.values(storageData))
+    // find taskName: 'target' and remove object from array
+    let index = storageData.findIndex(x => x.taskName === target);
+    // removing the element at the index given, only removing 1 element in array
+    storageData.splice(index, 1);
+
+    // save modified array to local storage
+    localStorage.setItem('storageData', JSON.stringify(storageData));
+
+}
