@@ -21,13 +21,14 @@
     <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
 </head>
 
-<body class="bg-primary bg-opacity-25">
-    <header class="p-2 rounded-bottom">
+<body class="bg-secondary bg-opacity-25">
+    <header class="p-2 bg-info rounded-bottom bg-opacity-25 mb-2 p-3 text-center">
         <h1 class="font-monospace display-2">Task Manager</h1>
     </header>
     <main>
         <!-- Button trigger modal -->
-        <button style="display:inline-block" type="button" class="btn btn rounded-pill btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button style="display:inline-block" type="button" class="btn btn rounded-pill btn-sm" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">
             <svg style="display: inline;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                 class="bi bi-info-circle" viewBox="0 0 16 16">
                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
@@ -37,7 +38,6 @@
         </button>
         <!-- current date and time using Day.js -->
         <p style="display:inline-block" id="current-date">
-
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -55,16 +55,18 @@
                 </div>
             </div>
         </div>
-        </div>
-        <!-- Task Info Form -->
+        
+        <!-- Create Task Form -->
         <form id="task-form" class="needs-validation form card-body bg-light rounded mx-3">
+            <h3>Create a Task</h3>
             <div class="mb-3">
                 <label for="task-name" class="form-label">Task name</label>
                 <input name="taskName" class="form-control" id="task-name" rows="3" required></input>
                 <div class="invalid-feedback">Please fill out this field.</div>
             </div>
             <div class="mb-3">
-                <select name="priority" class="form-select" aria-label="Default select example" id="task-priority" required>
+                <select name="priority" class="form-select" aria-label="Default select example" id="task-priority"
+                    required>
                     <option selected disabled value>Priority level</option>
                     <option value="1">High</option>
                     <option value="2">Medium</option>
@@ -83,21 +85,27 @@
                 <div class="invalid-feedback">Please fill out this field.</div>
             </div>
             <div class="col-auto">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-secondary">Create</button>
             </div>
         </form>
-        <table class="table mx-3">
-            <thead>
-                <th scope="col">Task Name</th>
-                <th scope="col">Priority</th>
-                <th scope="col">Due Date</th>
-                <th scope="col">Task Description</th>
-                <th scope="col">Actions</th>
-            </thead>
-            <tbody id="tbody">
 
-            </tbody>
-        </table>
+        <!-- Task List -->
+        <div class="table-responsive mx-3 mt-3 rounded">
+            <table class="table table-light caption-top">
+                <caption>Task List</caption>
+                <thead>
+                    <th scope="col">Task Name</th>
+                    <th scope="col">Priority</th>
+                    <th scope="col">Due Date</th>
+                    <th scope="col">Task Description</th>
+                    <th scope="col">Actions</th>
+                </thead>
+                <tbody id="tbody">
+
+                </tbody>
+            </table>
+        </div>
+
     </main>
 </body>
 <script src="./assets/js/script.js"></script>

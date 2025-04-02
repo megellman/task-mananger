@@ -36,19 +36,18 @@ taskForm.on("submit", function (e) {
     for (let x in formData) {
         if (formData[x] === '1') {
             $('<td>').text('High').appendTo(newRow);
-            newRow.addClass('bg-danger');
+            newRow.addClass('table-danger');
         } else if (formData[x] === '2') {
             $('<td>').text('Medium').appendTo(newRow);
-            newRow.addClass('bg-warning');
+            newRow.addClass('table-warning');
         } else if (formData[x] === '3') {
             $('<td>').text('Low').appendTo(newRow);
-            newRow.addClass('bg-success');
+            newRow.addClass('table-success');
         } else {
             $('<td>').text(formData[x]).appendTo(newRow);
         }
     }
-    newRow.append($('<button type="button" class="btn-delete row-btn-close btn-sm bg-secondary rounded" data-toggle="button" aria-label="Close">Delete</button>'));
-    newRow.append($('<button type="button" class="btn-edit row-btn-close btn-sm bg-secondary rounded" data-toggle="button">Edit</button>'))
+    newRow.append($('<td><button type="button" class="btn-delete mx-1 row-btn-close btn-sm bg-danger bg-opacity-75 rounded" data-toggle="button" aria-label="Close">Delete</button><button type="button" class="btn-edit row-btn-close btn-sm bg-warning bg-opacity-75 rounded" data-toggle="button">Edit</button></td>'));
     newRow.appendTo(tableBody);
 
     // if no storage data yet, then save form data as storage data
@@ -90,20 +89,19 @@ $(document).ready(function () {
             for (let x in storageData[i]) {
                 if (storageData[i][x] === '1') {
                     $('<td>').text('High').appendTo(newRow);
-                    newRow.addClass('bg-danger bg-opacity-75');
+                    newRow.addClass('table-danger');
                 } else if (storageData[i][x] === '2') {
                     $('<td>').text('Medium').appendTo(newRow);
-                    newRow.addClass('bg-warning bg-opacity-75');
+                    newRow.addClass('table-warning');
                 } else if (storageData[i][x] === '3') {
                     $('<td>').text('Low').appendTo(newRow);
-                    newRow.addClass('bg-success bg-opacity-75');
+                    newRow.addClass('table-success');
                 } else {
                     $('<td>').text(storageData[i][x]).appendTo(newRow);
                 }
             }
 
-            newRow.append($('<button type="button" class="btn-delete row-btn-close btn-sm bg-secondary rounded" data-toggle="button" aria-label="Close">Delete</button>'));
-            newRow.append($('<button type="button" class="btn-edit row-btn-close btn-sm bg-secondary rounded" data-toggle="button">Edit</button>'))
+            newRow.append($('<td><button type="button" class="btn-delete mx-1 row-btn-close btn-sm bg-danger bg-opacity-75 rounded" data-toggle="button" aria-label="Close">Delete</button><button type="button" class="btn-edit row-btn-close btn-sm bg-warning bg-opacity-75 rounded" data-toggle="button">Edit</button></td>'));
             newRow.appendTo(tableBody);
         }
     }
@@ -142,20 +140,19 @@ function deleteTask(e) {
 // edit tasks
 $(document).on('click', function (e) {
     if ($(e.target).hasClass('btn-edit') && $(e.target).text() === 'Edit') {
+        $('input#task-name').val($(e.target).parent().siblings().eq(0).text());
 
-        $('input#task-name').val($(e.target).parent().children().eq(0).text());
-
-        if ($(e.target).parent().children().eq(1).text() === "High") {
+        if ($(e.target).parent().siblings().eq(1).text() === "High") {
             $('select#task-priority').val(1);
-        } else if ($(e.target).parent().children().eq(1).text() === "Medium") {
+        } else if ($(e.target).parent().siblings().eq(1).text() === "Medium") {
             $('select#task-priority').val(2);
-        } else if ($(e.target).parent().children().eq(1).text() === "Low") {
+        } else if ($(e.target).parent().siblings().eq(1).text() === "Low") {
             $('select#task-priority').val(3);
         }
 
-        $('input#date-picker').val($(e.target).parent().children().eq(2).text());
+        $('input#date-picker').val($(e.target).parent().siblings().eq(2).text());
 
-        $('textarea#task-description').val($(e.target).parent().children().eq(3).text());
+        $('textarea#task-description').val($(e.target).parent().siblings().eq(3).text());
 
         $(e.target).text('Save Changes');
     } else if ($(e.target).hasClass('btn-edit') && $(e.target).text() === 'Save Changes') {
@@ -164,7 +161,7 @@ $(document).on('click', function (e) {
 
         storageData = JSON.parse(localStorage.getItem('storageData'));
 
-        let target = $(e.target).parent().children().eq(0).text();
+        let target = $(e.target).parent().siblings().eq(0).text();
 
         // find taskName: 'target' and remove object from array
         let index = storageData.findIndex(x => x.taskName === target);
