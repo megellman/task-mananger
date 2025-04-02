@@ -125,7 +125,7 @@ function deleteTask(e) {
     let target = $(e.target).parent().children().eq(0).text();
     console.log($(e.target))
     // deletes element from html
-    $(e.target).parent().remove()
+    $(e.target).parent().parent().remove()
 
     console.log(Object.values(storageData))
     // find taskName: 'target' and remove object from array
@@ -135,9 +135,6 @@ function deleteTask(e) {
 
     // save modified array to local storage
     localStorage.setItem('storageData', JSON.stringify(storageData));
-    
-    // reloads page to update changes
-    location.reload();
 }
 
 // edit tasks
