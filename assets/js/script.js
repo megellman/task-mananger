@@ -135,6 +135,9 @@ function deleteTask(e) {
 
     // save modified array to local storage
     localStorage.setItem('storageData', JSON.stringify(storageData));
+    
+    // reloads page to update changes
+    location.reload();
 }
 
 // edit tasks
