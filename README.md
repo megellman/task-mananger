@@ -1,110 +1,65 @@
-# Mini-Project: Task Manager with Priorities
-In this project, you will build a task manager web app that allows users to add tasks, assign priority levels, track deadlines, and delete tasks. Use Bootstrap, Google Fonts, and jQuery to make the app interactive and visually appealing.
 
-## Instructions
-This mini-project is also broken down into multiple tasks. The first three tasks will help you achieve the Minimum Viable Product (MVP).
+# Task Manager
 
-## Task 1: HTML Structure
-### Header Section
+I created a task manager web app that allows users to add tasks, assign priority levels, track deadlines, edit tasks, and delete tasks using HTML, JavaScript, Bootstrap, Google Fonts, and jQuery.
+## Badges
 
-Create a header area that includes the title of the app, such as "Task Manager".
+Add badges from somewhere like: [shields.io](https://shields.io/)
 
-Include the current date and time using Day.js, and update it every second (formatted similarly: Jun 30, 2025 at 08:37:48 am).
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
+[![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
 
-### Task Input Form
 
-Use a Bootstrap card to create a form where users can input their task details.
+## Features
 
-The form should have the following fields:
-<ul>
-<li>Task name (text input)
-<li>Priority level (dropdown select with options: "High", "Medium", "Low")
-<li>Due date (use the date input type or jQuery UI datepicker)
-<li>Task description (textarea for longer details)
-</ul>
+### Modal for Instructions: 
+Modal that can be opened via a button. It provides instructions on how to use the app.
+### Capture Form Data and Save to LocalStorage: 
+Uses jQuery to capture form inputs on submit. Form data is used to create a new row in the table that displays the tasks. Task data is saved to localStorage. Form inputs cleared after task entry. 
+### Display Tasks from LocalStorage:
+Function reads tasks from localStorage and creates table rows.
+### Delete Tasks:
+Delete buttons on table rows to delete specific tasks. Event listener attached to Delete button using jQuery. When clicked, it removes the tasks from both the table and localStorage. 
+### Edit Tasks:
+Edit button on table rows to modify specific tasks. Event listener attached to Edit button. When clicked, the form is populated with the task data, allowng the user to update the task name, priority, due date, and description. After editing and savign the changes, the task data is updated in localStorage as well as the task list. 
 
-### Tasks List
 
-Create an empty Bootstrap table that will display the tasks once they are added.
+## Demo
 
-The table should have the following columns:
-| Task Name | Priority | Due Date | Task Description | Actions (For delete/edit) |
-| --- | --- | --- | ---- | ---- |
- 
+[Visit Page](https://megellman.github.io/task-mananger/)
 
-### Modal for Instructions
 
-Add a modal that can be opened via a button. 
+## Megan Ellman
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://megellman.github.io/portfolio/)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/megan-ellman/)
+[![github](https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white)](https://github.com/megellman)
 
-The modal should provide instructions on how to use the app, such as how to add a task and delete tasks.
+## License
 
-## Task 2: Capture Form Data and Save in LocalStorage
-### Form Submission
+[MIT](https://choosealicense.com/licenses/mit/)
 
-Using jQuery, set up functionality to capture the form inputs on submit.
 
-The form data should be used to create a new row in the table that displays the tasks.
+## Roadmap
 
-### LocalStorage
+- Task Sorting: Implement functionality to sort tasks by priority, due date, or name.
 
-Save the task data (task name, priority, due date, description) to localStorage to make it persistent across page refreshes.
+- Task Filtering: Allow users to filter tasks by priority level.
 
-After saving the data, clear the form inputs for the next task entry.
+- Task Completion: Add a checkbox for each task to mark it as completed, with a line-through or a different background color to indicate completion.
 
-### Close Modal on Submit
 
-Ensure the modal closes when the user submits a new task.
 
-Use jQuery to append a new task to the table based on the captured data.
+## Contributing
 
-## Task 3: Display Tasks from LocalStorage
-### Load Tasks on Page Load
+Contributions are always welcome!
 
-Create a function that reads the tasks from localStorage when the page loads.
+See `contributing.md` for ways to get started.
 
-### Create Table Rows:
-For each task, create a table row (<tr>) with the following columns:
-| Task Name | Priority | Due Date | Task Description | Actions (Edit/Delete buttons) |
-| --- | -- | --- | --- | --- |
+Please adhere to this project's `code of conduct`.
 
-### Color-Coding Based on Priority
-Assign colors to tasks based on their priority. For example:
 
-*High Priority: Red background.
-Medium Priority: Yellow background.
-Low Priority: Green background.*
+## Documentation
 
-### Clear and Update Table
-Before appending the tasks to the table, clear the <tbody> of the table to avoid duplicate rows when the page is reloaded.
+[Documentation](https://megellman.github.io/task-manager/)
 
-Call this function both on page load and after a task is submitted.
-
-## Task 4: Delete and Edit Tasks
-### Edit/Delete Columns
-
-Add a new column to the table for Actions, where each task has a Delete button and an Edit button.
-
-### Delete Functionality
-
-Attach an event listener to the Delete button using jQuery. When clicked, it should remove the task from both the table and localStorage.
-
-Use jQuery’s event delegation for deleting, as the rows are dynamically generated.
-
-### Edit Functionality
-
-Allow users to click an Edit button to modify task details. 
-
-The form should be populated with the task data, allowing users to update the task name, priority, due date, and description.
-
-After editing, the task data should be updated in localStorage and the task list should reflect the changes.
-
-### Updating Table After Modifications
-
-Make sure the task list gets updated correctly after editing or deleting tasks by reloading data from localStorage.
-
-### Bonus Features
-<ul>
-<li>Task Sorting: Implement functionality to sort tasks by priority, due date, or name.
-<li>Task Filtering: Allow users to filter tasks by priority level.
-<li>Task Completion: Add a checkbox for each task to mark it as completed, with a line-through or a different background color to indicate completion.
-</ul>
