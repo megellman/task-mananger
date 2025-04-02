@@ -90,13 +90,13 @@ $(document).ready(function () {
             for (let x in storageData[i]) {
                 if (storageData[i][x] === '1') {
                     $('<td>').text('High').appendTo(newRow);
-                    newRow.addClass('bg-danger');
+                    newRow.addClass('bg-danger bg-opacity-75');
                 } else if (storageData[i][x] === '2') {
                     $('<td>').text('Medium').appendTo(newRow);
-                    newRow.addClass('bg-warning');
+                    newRow.addClass('bg-warning bg-opacity-75');
                 } else if (storageData[i][x] === '3') {
                     $('<td>').text('Low').appendTo(newRow);
-                    newRow.addClass('bg-success');
+                    newRow.addClass('bg-success bg-opacity-75');
                 } else {
                     $('<td>').text(storageData[i][x]).appendTo(newRow);
                 }
