@@ -13,10 +13,12 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('public'));
 
+// home route
 app.get('/', (req, res) =>
     res.sendFile(path.join(__dirname, '/public/index.html'))
 )
 
+// get tasks from database
 app.get('/tasks/', (req, res) => {
     console.info(`${req.method} request received`);
     fs.readFile('./db/tasks.json', (err, data) => {
@@ -25,6 +27,7 @@ app.get('/tasks/', (req, res) => {
     })
 })
 
+// create new task
 app.post('/tasks/', (req, res) => {
     console.info(`${req.method} request received`);
     console.log(req.body);
@@ -60,6 +63,7 @@ app.post('/tasks/', (req, res) => {
     }
 });
 
+// delete task
 app.delete('/tasks/:id', async (req, res) => {
     try {
         console.info(`${req.method} request received`);
@@ -84,6 +88,7 @@ app.delete('/tasks/:id', async (req, res) => {
     }
 });
 
+// update task
 app.put('/tasks/:id', async (req, res) => {
     try {
         console.info(`${req.method} request received`);

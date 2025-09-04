@@ -32,7 +32,7 @@ taskForm.on("submit", function (e) {
     let newRow = $('<tr>');
 
     // change color of task based on priority
-    // chagned task priority to a word, not a number
+    // changed task priority to a word, not a number
     for (let x in formData) {
         if (formData[x] === '1') {
             $('<td>').text('High').appendTo(newRow);
@@ -102,7 +102,6 @@ $(document).ready(function () {
                         newRow.addClass('table-primary');
                     } else if (x === 'id') {
                         newRow.attr('id', data[i][x]);
-                        console.log(data[i][x])
                     } else {
                         $('<td>').text(data[i][x]).appendTo(newRow);
                     }
@@ -166,7 +165,7 @@ $(document).on('click', function (e) {
             'description': $('textarea#task-description').val(), 
             'id' : id
         }
-        console.log('Client side: ', edits);
+
 
             fetch(`/tasks/${id}`, {
                 method: 'PUT',
