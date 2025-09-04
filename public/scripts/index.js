@@ -122,27 +122,20 @@ function resetTable() {
     $(tableBody > 'tr').remove();
 }
 
-// if element with btn-delete class is clicked, call delete task function
+// if element with btn-delete class is clicked, delete task
 $(document).on('click', function (e) {
-    if ($(e.target).hasClass('btn-delete')) deleteTask(e)
-})
-
-// delete task from table
-async function deleteTask(e) {
-    let taskTarget = $(e.target).parent().parent();
-    const id = taskTarget.attr('id');
-
-    const response = await fetch(`/tasks/${id}`, {
-        method: 'DELETE',
-    });
-    if (response.ok) {
-        console.log('task deleted');
-        location.reload();
-    } else {
-        console.log(response)
-        console.log('failed to delete')
+    if($(e.target).hasClass('btn-delete')){
+        let taskTarget = $(e.target).parent().parent();
+        const id = taskTarget.attr('id');
+    
+        fetch(`/tasks/${id}`, {
+            method: 'DELETE',
+        })
+        .then((response) => {
+            response.ok ? location.reload() : console.error(response)
+        })
     }
-}
+})
 
 // edit tasks
 $(document).on('click', function (e) {
@@ -163,26 +156,31 @@ $(document).on('click', function (e) {
 
         $('textarea#task-description').val($(e.target).parent().siblings().eq(3).text());
 
-        $(taskForm.button).text('Save');
+        $(e.target).text('Save');
     } else if ($(e.target).hasClass('btn-edit') && $(e.target).text() === 'Save') {
-        console.log('Changes!')
-        const taskData = Object.fromEntries((taskForm).serializeArray().map(pair => [pair.name, pair.value]))
+        let id = $(e.target).parent().parent().attr('id');
+        const edits = { 
+            'taskName': $('input#task-name').val(), 
+            'priority': $('select#task-priority').val(), 
+            'dueDate': $('input#date-picker').val(), 
+            'description': $('textarea#task-description').val(), 
+            'id' : id
+        }
+        console.log('Client side: ', edits);
 
-        storageData = JSON.parse(localStorage.getItem('storageData'));
+            fetch(`/tasks/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-type': 'application/json' },
+                body: JSON.stringify(edits),
+            })
+            .then((response) => response.json);
 
-        let target = $(e.target).parent().siblings().eq(0).text();
-
-        // find taskName: 'target' and remove object from array
-        let index = storageData.findIndex(x => x.taskName === target);
-        // replace array object with updated data
-        storageData.splice(index, 1, taskData);
-        console.log(storageData);
-        // save modified array to local storage
-        localStorage.setItem('storageData', JSON.stringify(storageData));
         // resets form
         taskForm.get(0).reset();
         // reload page to generate table with updated data
         location.reload()
     }
 })
+
+
 

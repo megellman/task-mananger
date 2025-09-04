@@ -84,6 +84,32 @@ app.delete('/tasks/:id', async (req, res) => {
     }
 });
 
+app.put('/tasks/:id', async (req, res) => {
+    try {
+        console.info(`${req.method} request received`);
+
+        let data = await fs.promises.readFile('./db/tasks.json', 'utf-8');
+        let parsedData = JSON.parse(data);
+
+        let index = parsedData.findIndex(x => x.id === req.params.id);
+
+        let newVersion = req.body;
+        
+        parsedData.splice(index, 1, newVersion);
+        
+        if (index === -1) {
+            return res.status(404).json({ error: 'Task not found' });
+        }
+
+        await fs.promises.writeFile('./db/tasks.json', JSON.stringify(parsedData, null, 2));
+
+        res.status(200).json({ message: 'Task updated!' });
+    } catch(err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to update task' });
+    }
+});
+
 app.listen(PORT, () =>
     console.log(`App listening at http://localhost:${PORT} 🚀`)
 );
