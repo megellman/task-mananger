@@ -50,61 +50,71 @@ taskForm.on("submit", function (e) {
     newRow.append($('<td><button type="button" class="btn-delete mx-1 row-btn-close btn-sm bg-danger bg-opacity-75 rounded" data-toggle="button" aria-label="Close">Delete</button><button type="button" class="btn-edit row-btn-close btn-sm bg-warning bg-opacity-75 rounded" data-toggle="button">Edit</button></td>'));
     newRow.appendTo(tableBody);
 
-    // if no storage data yet, then save form data as storage data
-    if (!(localStorage.storageData)) {
-        console.log('storage empty');
-        // initializing an empty array
-        storageData = [];
-        // pushing formData obj into empty array
-        storageData.push(formData);
-        localStorage.setItem('storageData', JSON.stringify(storageData));
-    } else {
-        // pulling storageData from local storage and putting its value into variable storageData
-        storageData = JSON.parse(localStorage.getItem('storageData'));
-        // add new form data to storage data
-        storageData.push(formData);
-        console.log('storageData', storageData)
+    const postTask = (task) =>
+        fetch('/tasks/', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+            },
+            body: JSON.stringify(task),
+        })
+            .then((response) => response.json())
+            .then((data) => data)
+            .catch((error) => {
+                console.error('Error: ', error);
+            });
 
-        localStorage.setItem('storageData', JSON.stringify(storageData));
-    }
+    postTask(formData)
 
     // resets form
     taskForm.get(0).reset();
 })
 
-// on page load, get storageData from local storage and create tasks
+// on page load, get storageData and create tasks
 $(document).ready(function () {
     resetTable();
-    if (!(localStorage.storageData)) {
-        console.log('storage empty, no tasks to load');
-    } else {
-        console.log('generating tasks');
 
-        // get storageData and save as an array
-        storageData = JSON.parse(localStorage.getItem('storageData'));
+    async function getTasks() {
+        const response = await fetch('/tasks/', {
+            method: 'GET',
+            headers: {
+                'Content-type': 'application/json',
+            },
+        })
+        let data = await response.json();
+        if (!data) {
+            console.log('no tasks to load');
+        } else {
+            console.log('generating tasks');
 
-        // create table rows
-        for (let i = 0; i < storageData.length; i++) {
-            let newRow = $('<tr>');
-            for (let x in storageData[i]) {
-                if (storageData[i][x] === '1') {
-                    $('<td>').text('High').appendTo(newRow);
-                    newRow.addClass('table-danger');
-                } else if (storageData[i][x] === '2') {
-                    $('<td>').text('Medium').appendTo(newRow);
-                    newRow.addClass('table-warning');
-                } else if (storageData[i][x] === '3') {
-                    $('<td>').text('Low').appendTo(newRow);
-                    newRow.addClass('table-success');
-                } else {
-                    $('<td>').text(storageData[i][x]).appendTo(newRow);
+            // create table rows
+            for (let i = 0; i < data.length; i++) {
+                let newRow = $('<tr>');
+                for (let x in data[i]) {
+                    if (data[i][x] === '1') {
+                        $('<td>').text('High').appendTo(newRow);
+                        newRow.addClass('table-danger');
+                    } else if (data[i][x] === '2') {
+                        $('<td>').text('Medium').appendTo(newRow);
+                        newRow.addClass('table-warning');
+                    } else if (data[i][x] === '3') {
+                        $('<td>').text('Low').appendTo(newRow);
+                        newRow.addClass('table-primary');
+                    } else if (x === 'id') {
+                        newRow.attr('id', data[i][x]);
+                        console.log(data[i][x])
+                    } else {
+                        $('<td>').text(data[i][x]).appendTo(newRow);
+                    }
                 }
-            }
 
-            newRow.append($('<td><button type="button" class="btn-delete mx-1 row-btn-close btn-sm bg-danger bg-opacity-75 rounded" data-toggle="button" aria-label="Close">Delete</button><button type="button" class="btn-edit row-btn-close btn-sm bg-warning bg-opacity-75 rounded" data-toggle="button">Edit</button></td>'));
-            newRow.appendTo(tableBody);
+                newRow.append($('<td><button type="button" class="btn-delete mx-1 row-btn-close btn-sm bg-danger bg-opacity-75 rounded" data-toggle="button" aria-label="Close">Delete</button><button type="button" class="btn-edit row-btn-close btn-sm bg-warning bg-opacity-75 rounded" data-toggle="button">Edit</button></td>'));
+                newRow.appendTo(tableBody);
+            }
         }
     }
+
+    getTasks();
 })
 
 // remove all table rows before adding new ones 
@@ -118,30 +128,29 @@ $(document).on('click', function (e) {
 })
 
 // delete task from table
-function deleteTask(e) {
-    // pulling storageData from local storage and putting its value into variable storageData
-    storageData = JSON.parse(localStorage.getItem('storageData'));
+async function deleteTask(e) {
+    let taskTarget = $(e.target).parent().parent();
+    const id = taskTarget.attr('id');
 
-    let target = $(e.target).parent().children().eq(0).text();
-    console.log($(e.target))
-    // deletes element from html
-    $(e.target).parent().parent().remove()
-
-    console.log(Object.values(storageData))
-    // find taskName: 'target' and remove object from array
-    let index = storageData.findIndex(x => x.taskName === target);
-    // removing the element at the index given, only removing 1 element in array
-    storageData.splice(index, 1);
-
-    // save modified array to local storage
-    localStorage.setItem('storageData', JSON.stringify(storageData));
+    const response = await fetch(`/tasks/${id}`, {
+        method: 'DELETE',
+    });
+    if (response.ok) {
+        console.log('task deleted');
+        location.reload();
+    } else {
+        console.log(response)
+        console.log('failed to delete')
+    }
 }
 
 // edit tasks
 $(document).on('click', function (e) {
     if ($(e.target).hasClass('btn-edit') && $(e.target).text() === 'Edit') {
+        // values of task added to form inputs
         $('input#task-name').val($(e.target).parent().siblings().eq(0).text());
 
+        // changes numerical value back to words for priority
         if ($(e.target).parent().siblings().eq(1).text() === "High") {
             $('select#task-priority').val(1);
         } else if ($(e.target).parent().siblings().eq(1).text() === "Medium") {
@@ -154,8 +163,8 @@ $(document).on('click', function (e) {
 
         $('textarea#task-description').val($(e.target).parent().siblings().eq(3).text());
 
-        $(e.target).text('Save Changes');
-    } else if ($(e.target).hasClass('btn-edit') && $(e.target).text() === 'Save Changes') {
+        $(taskForm.button).text('Save');
+    } else if ($(e.target).hasClass('btn-edit') && $(e.target).text() === 'Save') {
         console.log('Changes!')
         const taskData = Object.fromEntries((taskForm).serializeArray().map(pair => [pair.name, pair.value]))
 
