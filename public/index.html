@@ -38,7 +38,7 @@
         </button>
         <!-- current date and time using Day.js -->
         <p style="display:inline-block" id="current-date">
-        <!-- Modal -->
+            <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -55,57 +55,64 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Create Task Form -->
-        <form id="task-form" class="needs-validation form card-body bg-light rounded mx-3">
-            <h3>Create a Task</h3>
-            <div class="mb-3">
-                <label for="task-name" class="form-label">Task name</label>
-                <input name="taskName" class="form-control" id="task-name" rows="3" required></input>
-                <div class="invalid-feedback">Please fill out this field.</div>
-            </div>
-            <div class="mb-3">
-                <select name="priority" class="form-select" aria-label="Default select example" id="task-priority"
-                    required>
-                    <option selected disabled value>Priority level</option>
-                    <option value="1">High</option>
-                    <option value="2">Medium</option>
-                    <option value="3">Low</option>
-                </select>
-                <div class="invalid-feedback">Please fill out this field.</div>
-            </div>
-            <div class="mb-3">
-                <label for="date-picker" class="form-label">Due date</label>
-                <input name="dueDate" type="date" class="form-control" id="date-picker" required>
-                <div class="invalid-feedback">Please fill out this field.</div>
-            </div>
-            <div class="mb-3">
-                <label for="task-description" class="form-label">Task description</label>
-                <textarea name="description" class="form-control" id="task-description" rows="3" required></textarea>
-                <div class="invalid-feedback">Please fill out this field.</div>
-            </div>
-            <div class="col-auto">
-                <button type="submit" class="btn btn-secondary">Create</button>
-            </div>
-        </form>
+        <div class="container">
+            <div class="row">
+                <!-- Create Task Form -->
+                <div class="col-4">
+                    <form id="task-form" class="needs-validation form card-body bg-light rounded mx-3">
+                        <h3>Create a Task</h3>
+                        <div class="mb-3">
+                            <label for="task-name" class="form-label">Task name</label>
+                            <input name="taskName" class="form-control" id="task-name" rows="3" required></input>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+                        <div class="mb-3">
+                            <select name="priority" class="form-select" aria-label="Default select example"
+                                id="task-priority" required>
+                                <option selected disabled value>Priority level</option>
+                                <option value="1">High</option>
+                                <option value="2">Medium</option>
+                                <option value="3">Low</option>
+                            </select>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="date-picker" class="form-label">Due date</label>
+                            <input name="dueDate" type="date" class="form-control" id="date-picker" required>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="task-description" class="form-label">Task description</label>
+                            <textarea name="description" class="form-control" id="task-description" rows="3"
+                                required></textarea>
+                            <div class="invalid-feedback">Please fill out this field.</div>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-secondary">Create</button>
+                        </div>
+                    </form>
+                </div>
 
-        <!-- Task List -->
-        <div class="table-responsive mx-3 mt-3 rounded">
-            <table class="table table-light caption-top">
-                <caption>Task List</caption>
-                <thead>
-                    <th scope="col">Task Name</th>
-                    <th scope="col">Priority</th>
-                    <th scope="col">Due Date</th>
-                    <th scope="col">Task Description</th>
-                    <th scope="col">Actions</th>
-                </thead>
-                <tbody id="tbody">
-
-                </tbody>
-            </table>
+                <!-- Task List -->
+                <div class="col-8">
+                    <div class="table-responsive mx-3 mt-3 rounded">
+                        <table class="table table-light caption-top">
+                            <caption>Task List</caption>
+                            <thead>
+                                <th scope="col">Task Name</th>
+                                <th scope="col">Priority</th>
+                                <th scope="col">Due Date</th>
+                                <th scope="col">Task Description</th>
+                                <th scope="col">Actions</th>
+                            </thead>
+                            <tbody id="tbody">
+    
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-
     </main>
 </body>
 <script src="./scripts/index.js"></script>
