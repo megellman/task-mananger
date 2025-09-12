@@ -91,17 +91,19 @@ $(document).ready(function () {
             for (let i = 0; i < data.length; i++) {
                 let newRow = $('<tr>');
                 for (let x in data[i]) {
-                    if (data[i][x] === '1') {
-                        $('<td>').text('High').appendTo(newRow);
-                        newRow.addClass('table-danger');
-                    } else if (data[i][x] === '2') {
-                        $('<td>').text('Medium').appendTo(newRow);
-                        newRow.addClass('table-warning');
-                    } else if (data[i][x] === '3') {
-                        $('<td>').text('Low').appendTo(newRow);
-                        newRow.addClass('table-primary');
-                    } else if (x === 'id') {
+                    if (x === 'id') {
                         newRow.attr('id', data[i][x]);
+                    } else if (x === 'priority') {
+                        if (data[i][x] === '1') {
+                            $('<td>').text('High').appendTo(newRow);
+                            newRow.addClass('table-danger');
+                        } else if (data[i][x] === '2') {
+                            $('<td>').text('Medium').appendTo(newRow);
+                            newRow.addClass('table-warning');
+                        } else if (data[i][x] === '3') {
+                            $('<td>').text('Low').appendTo(newRow);
+                            newRow.addClass('table-primary');
+                        }
                     } else {
                         $('<td>').text(data[i][x]).appendTo(newRow);
                     }
@@ -123,16 +125,16 @@ function resetTable() {
 
 // if element with btn-delete class is clicked, delete task
 $(document).on('click', function (e) {
-    if($(e.target).hasClass('btn-delete')){
+    if ($(e.target).hasClass('btn-delete')) {
         let taskTarget = $(e.target).parent().parent();
         const id = taskTarget.attr('id');
-    
+
         fetch(`/tasks/${id}`, {
             method: 'DELETE',
         })
-        .then((response) => {
-            response.ok ? location.reload() : console.error(response)
-        })
+            .then((response) => {
+                response.ok ? location.reload() : console.error(response)
+            })
     }
 })
 
@@ -156,24 +158,24 @@ $(document).on('click', function (e) {
         $('textarea#task-description').val($(e.target).parent().siblings().eq(3).text());
 
         $(e.target).text('Save');
- 
+
         $('#task-form .btn').attr('disabled', 'disabled');
     } else if ($(e.target).hasClass('btn-edit') && $(e.target).text() === 'Save') {
         let id = $(e.target).parent().parent().attr('id');
-        const edits = { 
-            'taskName': $('input#task-name').val(), 
-            'priority': $('select#task-priority').val(), 
-            'dueDate': $('input#date-picker').val(), 
-            'description': $('textarea#task-description').val(), 
-            'id' : id
+        const edits = {
+            'taskName': $('input#task-name').val(),
+            'priority': $('select#task-priority').val(),
+            'dueDate': $('input#date-picker').val(),
+            'description': $('textarea#task-description').val(),
+            'id': id
         }
 
 
-            fetch(`/tasks/${id}`, {
-                method: 'PUT',
-                headers: { 'Content-type': 'application/json' },
-                body: JSON.stringify(edits),
-            })
+        fetch(`/tasks/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify(edits),
+        })
             .then((response) => response.json());
 
         // resets form
