@@ -174,7 +174,7 @@ $(document).on('click', function (e) {
                 headers: { 'Content-type': 'application/json' },
                 body: JSON.stringify(edits),
             })
-            .then((response) => response.json);
+            .then((response) => response.json());
 
         // resets form
         taskForm.get(0).reset();

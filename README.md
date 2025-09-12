@@ -34,7 +34,7 @@
 
 ## Description 
 
-[Visit the Deployed Site](https://task-mananger-7vkh.onrender.com/)
+[Visit the Deployed Site](https://task-mananger-7vkh.onrender.com/) 
 
 Task Manager is a full-stack web application that allows users to create, edit, delete, and track tasks. Each task can be customized with a name, priority level, due date, and description. Tasks are stored on the backend using a JSON file and can be persisted across sessions.
 
