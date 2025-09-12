@@ -1,7 +1,7 @@
 
 # Task Manager
 
-I created a task manager web app that allows users to add tasks, assign priority levels, track deadlines, edit tasks, and delete tasks using HTML, JavaScript, Bootstrap, Google Fonts, and jQuery.
+I created a task manager web app that allows users to add tasks, assign priority levels, track deadlines, edit tasks, and delete tasks using HTML, JavaScript, Express, Bootstrap, Google Fonts, and jQuery.
 ## Badges
 
 Add badges from somewhere like: [shields.io](https://shields.io/)

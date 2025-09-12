@@ -47,7 +47,7 @@ taskForm.on("submit", function (e) {
             $('<td>').text(formData[x]).appendTo(newRow);
         }
     }
-    newRow.append($('<td><button type="button" class="btn-delete mx-1 row-btn-close btn-sm bg-danger bg-opacity-75 rounded" data-toggle="button" aria-label="Close">Delete</button><button type="button" class="btn-edit row-btn-close btn-sm bg-warning bg-opacity-75 rounded" data-toggle="button">Edit</button></td>'));
+    newRow.append($('<td><button type="button" class="btn-delete mx-1 row-btn-close btn-sm btn-outline-dark rounded" data-toggle="button" aria-label="Close">Delete</button><button type="button" class="btn-edit row-btn-close btn-sm btn-outline-dark rounded" data-toggle="button">Edit</button></td>'));
     newRow.appendTo(tableBody);
 
     const postTask = (task) =>
@@ -107,7 +107,7 @@ $(document).ready(function () {
                     }
                 }
 
-                newRow.append($('<td><button type="button" class="btn-delete mx-1 row-btn-close btn-sm bg-danger bg-opacity-75 rounded" data-toggle="button" aria-label="Close">Delete</button><button type="button" class="btn-edit row-btn-close btn-sm bg-warning bg-opacity-75 rounded" data-toggle="button">Edit</button></td>'));
+                newRow.append($('<td><button type="button" class="btn-delete mx-1 row-btn-close btn-sm btn-outline-dark rounded" data-toggle="button" aria-label="Close">Delete</button><button type="button" class="btn-edit row-btn-close btn-sm btn-outline-dark rounded" data-toggle="button">Edit</button></td>'));
                 newRow.appendTo(tableBody);
             }
         }
@@ -156,6 +156,8 @@ $(document).on('click', function (e) {
         $('textarea#task-description').val($(e.target).parent().siblings().eq(3).text());
 
         $(e.target).text('Save');
+ 
+        $('#task-form .btn').attr('disabled', 'disabled');
     } else if ($(e.target).hasClass('btn-edit') && $(e.target).text() === 'Save') {
         let id = $(e.target).parent().parent().attr('id');
         const edits = { 
@@ -181,5 +183,8 @@ $(document).on('click', function (e) {
     }
 })
 
+$(document).ready(function() {
+  $("#task-table").DataTable();
+});
 
 

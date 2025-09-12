@@ -3,7 +3,7 @@
     "taskName": "Chapter 1",
     "priority": "1",
     "dueDate": "2025-09-04",
-    "description": "reading",
+    "description": "reading and quiz",
     "id": "9a96"
   },
   {
@@ -19,5 +19,12 @@
     "dueDate": "2025-09-13",
     "description": "reading",
     "id": "88e5"
+  },
+  {
+    "taskName": "Chapter 1",
+    "priority": "1",
+    "dueDate": "2025-09-04",
+    "description": "reading",
+    "id": "f624"
   }
 ]
