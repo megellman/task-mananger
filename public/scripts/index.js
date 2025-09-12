@@ -183,8 +183,3 @@ $(document).on('click', function (e) {
     }
 })
 
-$(document).ready(function() {
-  $("#task-table").DataTable();
-});
-
-
