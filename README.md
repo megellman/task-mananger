@@ -1,86 +1,110 @@
-# task-manager
+# Task Manager
 
 ## Table of Contents
-- [task-manager](#task-manager)
+- [Task Manager](#task-manager)
   - [Table of Contents](#table-of-contents)
   - [Technology Used](#technology-used)
   - [Description](#description)
+  - [Troubleshooting \& Support-Oriented Design](#troubleshooting--support-oriented-design)
+    - [Common Failure Scenarios Addressed](#common-failure-scenarios-addressed)
+    - [Debugging \& Error Handling Approach](#debugging--error-handling-approach)
+    - [Relevance to Technical Support Work](#relevance-to-technical-support-work)
   - [Usage](#usage)
   - [Learning Points](#learning-points)
   - [Author Info](#author-info)
-    - [Megan Ellman](#megan-ellman)
   - [License](#license)
 
-<br />
+---
 
 ## Technology Used
 
-| Technology Used         | Resource URL           | 
-| ------------- |:-------------:| 
-| HTML     | [https://developer.mozilla.org/en-US/docs/Web/HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)      |   
-| CSS     | [https://developer.mozilla.org/en-US/docs/Web/CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)      |   
-| JavaScript | [https://developer.mozilla.org/en-US/docs/Web/JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)     |    
-| jQuery | [https://jquery.com/](https://jquery.com/) |
-| Bootstrap | [https://getbootstrap.com/](https://getbootstrap.com/) |
-| Node.js | [https://nodejs.org/en/](https://nodejs.org/en/) |
-| Express | [https://expressjs.com/](https://expressjs.com/) |
-| UUID | [https://www.npmjs.com/package/uuid](https://www.npmjs.com/package/uuid) |
-| Path | [https://nodejs.org/docs/latest/api/path.html](https://nodejs.org/docs/latest/api/path.html) |
-| File System (fs) | [https://nodejs.org/api/fs.html](https://nodejs.org/api/fs.html) |
-| Google Fonts | [https://fonts.google.com/](https://fonts.google.com/) |
-| jQuery UI (Datepicker) | [https://jqueryui.com/datepicker/](https://jqueryui.com/datepicker/) |
+| Technology Used | Resource URL |
+| --------------- | ------------ |
+| HTML | https://developer.mozilla.org/en-US/docs/Web/HTML |
+| CSS | https://developer.mozilla.org/en-US/docs/Web/CSS |
+| JavaScript | https://developer.mozilla.org/en-US/docs/Web/JavaScript |
+| jQuery | https://jquery.com/ |
+| Bootstrap | https://getbootstrap.com/ |
+| Node.js | https://nodejs.org/en/ |
+| Express | https://expressjs.com/ |
+| UUID | https://www.npmjs.com/package/uuid |
+| File System (fs) | https://nodejs.org/api/fs.html |
+| jQuery UI (Datepicker) | https://jqueryui.com/datepicker/ |
 
-<br />
+---
 
-## Description 
+## Description
 
-[Visit the Deployed Site](https://task-mananger-7vkh.onrender.com/) 
+[Visit the Deployed Site](https://task-mananger-7vkh.onrender.com/)
 
-Task Manager is a full-stack web application that allows users to create, edit, delete, and track tasks. Each task can be customized with a name, priority level, due date, and description. Tasks are stored on the backend using a JSON file and can be persisted across sessions.
+Task Manager is a full-stack web application that allows users to create, edit, delete, and track tasks. Each task includes a name, priority level, due date, and description. Tasks are persisted on the backend using a Node.js and Express server with a JSON-based data store.
 
-This project was built to practice working with RESTful routes, Express.js, jQuery, and dynamic DOM manipulation. A priority-based color-coding system helps users visually identify high-, medium-, and low-priority tasks.
+The application was built to practice RESTful routing, backend data handling, and frontend-to-backend communication, while maintaining predictable behavior and clear user feedback.
 
-<br/>
+---
 
-## Usage 
+## Troubleshooting & Support-Oriented Design
 
-1. Clone the repo or visit the deployed link.
+This project was built to mirror common SaaS support scenarios involving data persistence, CRUD operations, and user-driven state changes.
+
+### Common Failure Scenarios Addressed
+- Invalid or incomplete task submissions
+- Data inconsistencies during create/update/delete operations
+- File read/write failures when persisting task data
+- UI state becoming out of sync with backend data
+
+### Debugging & Error Handling Approach
+- Validated incoming request data before writing updates to storage
+- Used structured route handling to isolate backend logic issues
+- Debugged file system operations to ensure consistent data persistence
+- Ensured UI updates reflected backend changes after each operation
+
+### Relevance to Technical Support Work
+- Demonstrates reproducing issues across frontend and backend layers
+- Mirrors support workflows involving data integrity and user-reported issues
+- Reflects a support mindset of isolating root causes and confirming expected behavior before resolution
+
+---
+
+## Usage
+
+1. Clone the repository or visit the deployed application.
 2. Fill in the task form to add a new task:
    - Task name
    - Priority level (High, Medium, Low)
    - Due date
    - Description
-3. Tasks will be dynamically displayed in a table.
-4. Edit or delete tasks with the corresponding buttons.
-5. Task data persists using a Node.js/Express backend and local JSON storage.
+3. Tasks are dynamically displayed in a table.
+4. Edit or delete tasks using the corresponding action buttons.
+5. Task data persists through a Node.js/Express backend using a local JSON file.
 
-Features include:
-- Priority-based row coloring using Bootstrap classes.
-- Dynamic date display using Day.js.
-- Editing a task pre-fills the form and updates the stored task.
+**Key Features**
+- Priority-based row coloring using Bootstrap classes
+- Editable tasks with pre-filled form values
+- Persistent data storage across sessions
 
-<br />
+---
 
-## Learning Points 
+## Learning Points
 
-- Implemented a full CRUD Express backend connected to a JSON file for task persistence.
-- Practiced using `fs` module to handle file reads/writes in Node.js.
-- Used jQuery and jQuery UI for DOM manipulation and form handling.
-- Built reusable and modular functions to simplify repeated logic.
-- Learned to assign unique IDs using a UUID helper and route them correctly.
-- Refined async/await practices for error handling and file operations.
+- Implemented a full CRUD backend using Express and JSON-based storage
+- Debugged frontend/backend synchronization issues
+- Validated and persisted user-generated data reliably
+- Reproduced and resolved issues involving state management and data integrity
+- Structured backend routes to simplify troubleshooting and maintenance
 
-<br />
+---
 
 ## Author Info
 
-### Megan Ellman
-[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://megellman.github.io/portfolio/)
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/megan-ellman/)
+**Megan Ellman**
+
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://megellman.github.io/react-portfolio/)  
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/megan-ellman/)  
 [![github](https://img.shields.io/badge/GitHub-%23121011.svg?logo=github&logoColor=white)](https://github.com/megellman)
 
-<br />
+---
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT License](https://choosealicense.com/licenses/mit/)
