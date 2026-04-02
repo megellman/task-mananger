@@ -88,18 +88,14 @@ Tasks are color-coded by priority using Bootstrap classes, so High-priority item
 ✏️ **Edit Task — Pre-filled Form with Existing Data**
 ![edit_form](./public/assets/edit.png)
 
-
-<div>
+**🎥 Walkthrough Demo**
     <a href="https://www.loom.com/share/57ebf8640c3341dfa3828443c7b424e9">
-      <p>🎥 Walkthrough Demo</p>
     </a>
     <a href="https://www.loom.com/share/57ebf8640c3341dfa3828443c7b424e9">
       <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/57ebf8640c3341dfa3828443c7b424e9-959fc5e98543013d-full-play.gif#t=0.1">
     </a>
-  </div>
 
 
----
 
 ## Installation & Setup
 
